@@ -32,12 +32,6 @@ def register_scrape():
     # options.add_argument("--incognito")
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
-
-    # proxy = "proxy.soax.com:9000"
-    # options.add_argument('--proxy-server=%s' % proxy)
-    # proxy = "rotating.proxyempire.io:9000"
-    # options.add_argument('--proxy-server=%s' % proxy)
-
     # options.add_argument("--headless")  # Comment this line to see script running in Chrome.
     options.add_experimental_option("detach", True)
 
