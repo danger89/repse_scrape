@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import json
-import pprint as pp
 
 
 def name_scrape(keyword, direction):
@@ -35,12 +34,12 @@ def name_scrape(keyword, direction):
     buttons = driver.find_elements(By.CSS_SELECTOR, '.btn-blanco')
     time.sleep(1)
     buttons[1].click()
-    time.sleep(1)
+    time.sleep(3)
 
     # Identify and click "Consultar" button
     continue_button = driver.find_element(By.CSS_SELECTOR, '.btn-continue')
     continue_button.click()
-    time.sleep(2)
+    time.sleep(3)
 
     # Identify search bar and input key word
     search_bar = driver.find_element(By.CSS_SELECTOR, '#rsoc')
@@ -161,4 +160,6 @@ def name_scrape(keyword, direction):
             continue
 
 
-name_scrape('tom', 'forward')
+name_scrape('mot', 'forward')
+
+

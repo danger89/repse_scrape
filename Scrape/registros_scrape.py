@@ -71,13 +71,21 @@ def register_scrape():
         search_button.click()
         time.sleep(2.1)
 
-        # Identify and click select button
-        selection_buttons = driver.find_elements(By.CSS_SELECTOR, '.g-recaptcha')
         try:
-            selection_button = selection_buttons[1]
+            # Checking if more than one result appears
+            td = driver.find_elements(By.CSS_SELECTOR, 'td')
+            results = []
+            for idx1, element in enumerate(td):
+                if idx1 % 3 == 0:
+                    results.append(element.text)
+            idx2 = results.index(nombre)
+
+            # Identify and click select button
+            selection_buttons = driver.find_elements(By.CSS_SELECTOR, '.g-recaptcha')
+            selection_button = selection_buttons[idx2+1]
             selection_button.click()
             time.sleep(1)
-        except IndexError:
+        except:
             try:
                 CAPTCHA_check = driver.find_element(By.CSS_SELECTOR, '.text-uppercase')
                 if 'CAPCHA' and 'INCORRECTA' in CAPTCHA_check.text:
@@ -157,13 +165,13 @@ def register_scrape():
 
         json_object = json.dumps(nombres_to_scrape, indent=4)
 
-        # Updating input_data json
+        # Updating registros.json
         with open('../Data/registros.json') as json_file:
             registros = json.load(json_file)
         registros = sorted(registros, key=lambda d: d['nombre_o_razon_social'])
 
         for obj in registros:
-            if nombre in obj["nombre_o_razon_social"]:
+            if obj["nombre_o_razon_social"] == nombre:
                 index_to_pop = nombres_to_scrape.index(nombre)
                 nombres_to_scrape.pop(index_to_pop)
 
