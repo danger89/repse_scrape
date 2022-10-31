@@ -23,7 +23,6 @@ def name_scrape(keyword, direction):
     options.add_experimental_option("detach", True)
 
     # Locate driver in path and input options parameters
-    chrome_driver_path = 'driver.exe'
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     # Define URL and input into driver

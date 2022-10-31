@@ -9,7 +9,6 @@ import copy
 import pandas as pd
 import warnings
 from fake_useragent import UserAgent
-import pprint as pp
 
 
 def register_scrape():
@@ -28,9 +27,9 @@ def register_scrape():
     ua = UserAgent()
     user_agent = ua.random
     options = webdriver.ChromeOptions()
-    # options.add_argument(f'user-agent={user_agent}')
+    options.add_argument(f'user-agent={user_agent}')
     # options.add_argument("--incognito")
-    options.add_argument("--disable-extensions")
+    # options.add_argument("--disable-extensions")
     options.add_argument("--disable-gpu")
     # options.add_argument("--headless")  # Comment this line to see script running in Chrome.
     options.add_experimental_option("detach", True)
@@ -69,7 +68,7 @@ def register_scrape():
         # Identify and click search button
         search_button = driver.find_element(By.CSS_SELECTOR, '#bnt_busqueda')
         search_button.click()
-        time.sleep(2.1)
+        time.sleep(2)
 
         try:
             # Checking if more than one result appears
@@ -84,7 +83,7 @@ def register_scrape():
             selection_buttons = driver.find_elements(By.CSS_SELECTOR, '.g-recaptcha')
             selection_button = selection_buttons[idx2+1]
             selection_button.click()
-            time.sleep(1)
+            time.sleep(0.3)
         except:
             try:
                 CAPTCHA_check = driver.find_element(By.CSS_SELECTOR, '.text-uppercase')
@@ -187,29 +186,30 @@ def register_scrape():
         except:
             time.sleep(0.1)
             return_button.click()
-        time.sleep(2.1)
+        time.sleep(2)
 
-        # Convert list to pandas DataFrame
-        registros = pd.DataFrame(registros)
+        # Every 10 iterations, update excel
+        if idx % 10 == 0:
+            # Convert list to pandas DataFrame
+            registros = pd.DataFrame(registros)
 
-        # Writing to Excel file (If "ModuleNotFoundError: No module named openpyxl", install and import openpyxl)
-        writer = pd.ExcelWriter('../Data/Registros_REPSE.xlsx')
-        registros.to_excel(writer, sheet_name='Registros', index=False, na_rep='NaN')
+            # Writing to Excel file (If "ModuleNotFoundError: No module named openpyxl", install and import openpyxl)
+            writer = pd.ExcelWriter('../Data/Registros_REPSE.xlsx')
+            registros.to_excel(writer, sheet_name='Registros', index=False, na_rep='NaN')
 
-        # Auto adjust column width
-        for index, column in enumerate(registros):
-            if index != 4:
-                column_width = max(registros[column].astype(str).map(len).max(), len(column))
-            else:
-                column_width = 20
-            col_idx = registros.columns.get_loc(column)
-            writer.sheets['Registros'].set_column(col_idx, col_idx, column_width)
+            # Auto adjust column width
+            for index, column in enumerate(registros):
+                if index != 4:
+                    column_width = max(registros[column].astype(str).map(len).max(), len(column))
+                else:
+                    column_width = 20
+                col_idx = registros.columns.get_loc(column)
+                writer.sheets['Registros'].set_column(col_idx, col_idx, column_width)
 
-        warnings.filterwarnings("ignore")
-        writer.save()
+            warnings.filterwarnings("ignore")
+            writer.save()
 
 
 register_scrape()
-
 
 
