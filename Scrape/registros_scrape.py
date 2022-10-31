@@ -42,18 +42,18 @@ def register_scrape():
     # Define URL and input into driver
     url = 'https://repse.stps.gob.mx'
     driver.get(url)
-    time.sleep(1)
+    time.sleep(1.5)
 
     # Identify and click "Consulta" button
     buttons = driver.find_elements(By.CSS_SELECTOR, '.btn-blanco')
     time.sleep(1)
     buttons[1].click()
-    time.sleep(2)
+    time.sleep(3)
 
     # Identify and click "Consultar" button
     continue_button = driver.find_element(By.CSS_SELECTOR, '.btn-continue')
     continue_button.click()
-    time.sleep(2)
+    time.sleep(3)
 
     # ---------------------------------- Register Scrape ---------------------------------- #
     print('--------------------------------------------')
@@ -83,7 +83,7 @@ def register_scrape():
             selection_buttons = driver.find_elements(By.CSS_SELECTOR, '.g-recaptcha')
             selection_button = selection_buttons[idx2+1]
             selection_button.click()
-            time.sleep(0.3)
+            time.sleep(0.4)
         except:
             try:
                 CAPTCHA_check = driver.find_element(By.CSS_SELECTOR, '.text-uppercase')
