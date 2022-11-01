@@ -66,9 +66,22 @@ Los códigos fueron probados con Python 3.9.
 * Dentro de las funciones que realizan los scrapes, se utiliza el método "**time.sleep()**" antes de oprimir cada botón. Esto se hace para esperar a que el botón   cargue y no se oprima antes de tiempo. En caso de tener una computadora lenta o una mala conexión a internet, es posible que los tiempos de espera establecidos en el código no sean suficientes para que los botones aparezcan a tiempo. Si este es el caso, deberán ajustar el tiempo en el "**time.sleep()**" correspondiente del botón que no carga a tiempo. <br/> <br/>
   <img src="https://user-images.githubusercontent.com/108626360/199157396-ff6845c4-cc40-4408-812a-be69e0642b64.jpg" width = 50%> <br/> <br/>
 
-* En los códigos de extracción de datos, se utiliza la versión de Windows del programa "**driver.exe**". Para correr el código en otro sistema operativo, se requiere reemplazar este programa con la versión correspondiente, que se puede encontrar en [esta liga].
+* En los códigos de extracción de datos, se utiliza la versión de Windows del programa "**driver.exe**". Para correr el código en otro sistema operativo, se requiere reemplazar este programa con la versión correspondiente, que se puede encontrar en [esta liga]. También es necesario nombrar el programa "**driver.exe**" y colocarlo en la carpeta "**Scrape**".
 <!-- -->
 [esta liga]: https://chromedriver.chromium.org/downloads
+
+## Posibles Mejoras
+El cambio de ubicación (IP address) utilizando un VPN es un proceso manual y debe realizarse siempre que haya un bloqueo por el reCAPTCHA. Este proceso se podría automatizar en Python utilizando un wrapper de ExpressVPN (o cualquier otro VPN) y cambiando la ubicación desde Python cuando se cumplan ciertos criterios. Desafortunadamente, no se encontró suficiente información acerca del tema para su implementación en Windows. No obstante, es algo que vale la pena investigar si se busca correr el código por un tiempo indefinido.
+
+## Alternativa
+En caso de tener dificultades mayores para correr los códigos, me puedo ofrecer personalmente para llevar a cabo la extracción y generar el documento Excel. Actualmente tengo la capacidad para extraer 3000-5000 registros al día utilizando los códigos. 
+
+## Contacto
+Para cualquier información adicional o problemas con los códigos, estoy a su disposición en el siguiente medio de contacto:
+* Correo: marcelovillarrealx@outlook.com
+
+
+
  
 
 
