@@ -63,7 +63,7 @@ Para el correcto funcionamiento de los scripts de Python, se especifican a conti
 Los códigos fueron probados con Python 3.9.
 
 ## Posibles Problemas
-Dentro de las funciones que realizan los scrapes, se utiliza el método "**time.sleep()**" antes de oprimir cada botón. Esto se hace para esperar a que el botón cargue y no se oprima antes de tiempo. En caso de tener una computadora lenta o una mala conexión a internet, es posible que los tiempos de espera establecidos en el código no sean suficientes para que los botones aparezcan a tiempo. Si este es el caso, deberán ajustar el tiempo en el "**time.sleep()**" correspondiente del botón que no carga a tiempo. <br/> <br/>
+* Dentro de las funciones que realizan los scrapes, se utiliza el método "**time.sleep()**" antes de oprimir cada botón. Esto se hace para esperar a que el botón   cargue y no se oprima antes de tiempo. En caso de tener una computadora lenta o una mala conexión a internet, es posible que los tiempos de espera establecidos en el código no sean suficientes para que los botones aparezcan a tiempo. Si este es el caso, deberán ajustar el tiempo en el "**time.sleep()**" correspondiente del botón que no carga a tiempo. <br/> <br/>
 <img src="https://user-images.githubusercontent.com/108626360/199157396-ff6845c4-cc40-4408-812a-be69e0642b64.jpg" width = 50%>
  
 
