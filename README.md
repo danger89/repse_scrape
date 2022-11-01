@@ -28,6 +28,11 @@ Para extraer los nombres de todos los registros, se debe correr "nombres\_scrape
 * **direction**: Ejecuta la extracción de nombres en la dirección especificada
   * **"forward"**: Ejecuta la extracción de nombres de ''a'' a ''z''
   * **"backward**: Ejecuta la extracción de nombres de ''z'' a ''a''
+  <!-- -->
+<!-- -->
+![repse_img6](https://user-images.githubusercontent.com/108626360/199155284-f3cfff3c-f6c8-4cb7-aa1f-b361bc9350c0.JPG)
+
+  
 
 
 ### Extracción de datos de registro
