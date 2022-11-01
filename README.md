@@ -40,7 +40,7 @@ Nota importante: Es necesario insertar un keyword, ya que la extracción de todo
 
 
 ### Extracción de datos de registro
-Para extraer los datos de cada registro se debe correr ''registros\_scrape.py''.
+Para extraer los datos de cada registro se debe correr ''registros\_scrape.py''. <br/> <br/>
 ![repse_img7](https://user-images.githubusercontent.com/108626360/199155486-f1fd328c-bb75-4ccc-acc7-3869e315df95.JPG)
 El script ejecutará el programa "driver.exe", abriendo un driver de Google Chrome que dará inicio a la extracción de datos de cada registro, alimentándose de los nombres en "nombres\_to\_scrape.json".
 <br/> <br/>
