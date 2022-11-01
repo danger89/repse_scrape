@@ -6,6 +6,8 @@ Debido a la architectura de la página, para recuperar todos los datos, es neces
 * Extracción de datos de cada nombre <br/>
 <!-- -->
 A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
+
+### Carpetas
 ![repse_img5](https://user-images.githubusercontent.com/108626360/199153187-9e032976-9c91-412b-b7a7-b5df5f808063.JPG)
 
 ### Carpeta "Scrape"
@@ -22,6 +24,7 @@ A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
 * **Registros_REPSE.xlsx**: Excel que contiene los datos de cada registroe
 
 ## Manual de Uso
+
 ### Extracción de nombres de registro
 Para extraer los nombres de todos los registros, se debe correr "nombres\_scrape.py". Dentro de este script, se encuentra una función que contiene dos parámetros:
 * **keyword**:  Acota los resultados a registros que contengan el keyword.
@@ -38,7 +41,6 @@ en la carpeta "**Data**". Previo a la divulgación del código, "**nombres.json*
 <br/> <br/>
 Nota importante: Es necesario insertar un keyword, ya que la extracción de todos los nombres sin filtro es extremadamente díficl de correr sin problemas. Se recomienda usar keywords de tres o cuatros letras.  
 
-
 ### Extracción de datos de registro
 Para extraer los datos de cada registro se debe correr "**registros_scrape.py**". <br/> <br/>
 ![repse_img7](https://user-images.githubusercontent.com/108626360/199155486-f1fd328c-bb75-4ccc-acc7-3869e315df95.JPG) <br/> <br/>
@@ -50,7 +52,6 @@ Al extraer los datos de un registro exitosamente, el nombre del registro será b
 Debido al reCAPTCHA que está implementado en la página, no se permitirá la extracción de datos después de una cantidad determinada de interacciones automatizadas en ella. Para rodear este problema, se recomienda el uso de un VPN (códigos probados con ExpressVPN).
 <br/> <br/>
 Si ocurre un bloqueo o no se permite el acceso a los datos (se regresa a la página inicial constantemente), es necesario cambiar a una ubicación distinta utilizando el VPN. <br/> <br/>
-
 <img src="https://user-images.githubusercontent.com/108626360/199156779-3c523670-8d91-4a5d-bc26-a3308ae4a99c.JPG" width = 25%>
 
 ## Dependencias
