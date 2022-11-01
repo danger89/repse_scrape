@@ -7,3 +7,5 @@ Debido a la architectura de la página, para recuperar todos los datos, es neces
 <!-- -->
 A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
 ![repse_img5](https://user-images.githubusercontent.com/108626360/199153187-9e032976-9c91-412b-b7a7-b5df5f808063.JPG)
+
+##### Carpeta "Scrape"
