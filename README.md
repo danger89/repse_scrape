@@ -41,7 +41,7 @@ El script ejecutará el programa "**driver.exe**", abriendo un driver de Google 
 Los nombres que aún no han sido extraídos se guardarán en "**nombres.json**" y en "**nombres_to_scrape.json**"
 en la carpeta "**Data**". Previo a la divulgación del código, "**nombres.json**" ya cuenta con más de 80,000 nombres únicos, que representa aproximadamente el 62.6% de todos los registros existentes.
 <br/> <br/>
-<span style="color: green"> Nota importante </span>: Es necesario insertar un keyword, ya que la extracción de todos los nombres sin filtro es extremadamente díficl de correr sin problemas. Se recomienda usar keywords de tres o cuatros letras.  
+```diff # Nota importante```: es necesario insertar un keyword, ya que la extracción de todos los nombres sin filtro es extremadamente díficl de correr sin problemas. Se recomienda usar keywords de tres o cuatros letras.  
 
 ### Extracción de datos de registro
 Para extraer los datos de cada registro se debe correr "**registros_scrape.py**". <br/> <br/>
