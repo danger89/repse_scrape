@@ -8,13 +8,13 @@ Debido a la architectura de la página, para recuperar todos los datos, es neces
 A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
 ![repse_img5](https://user-images.githubusercontent.com/108626360/199153187-9e032976-9c91-412b-b7a7-b5df5f808063.JPG)
 
-#### Carpeta "Scrape"
+### Carpeta "Scrape"
 ![repse_img4](https://user-images.githubusercontent.com/108626360/199153939-1d231009-bda5-4f8f-af46-f1544a5ea55e.JPG)
 * **driver.exe**: Archivo ejecutable que contiene un driver de Google Chrome
 * **nombres_scrape.py**: Python script que extrae los nombres de los registros
 * **registros_scrape.py**: Python script que extrae los datos de un registro, dado el nombre
 
-#### Carpeta "Data"
+### Carpeta "Data"
 ![repse_img3](https://user-images.githubusercontent.com/108626360/199154149-9e2cbb2c-7f54-4df7-8249-a0679ebb60cc.JPG)
 * **nombres.json**: Contiene todos los nombres extraídos
 * **nombres_to_scrape.json**: Contiene los nombres cuyos datos no han sido extraídos
@@ -22,5 +22,5 @@ A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
 * **Registros_REPSE.xlsx**: Excel que contiene los datos de cada registroe
 
 ## Manual de Uso
-#### Extracción de nombres de registro
-#### Extracción de datos de registro
+### Extracción de nombres de registro
+### Extracción de datos de registro
