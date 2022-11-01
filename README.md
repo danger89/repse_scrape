@@ -53,4 +53,18 @@ Si ocurre un bloqueo o no se permite el acceso a los datos (se regresa a la pág
 
 <img src="https://user-images.githubusercontent.com/108626360/199156779-3c523670-8d91-4a5d-bc26-a3308ae4a99c.JPG" width = 25%>
 
+## Dependencias
+Para el correcto funcionamiento de los scripts de Python, se especifican a continuación los requerimientos:
+* fake_useragent==0.1.11
+* pandas==1.5.1
+* selenium==4.5.0
+* webdriver_manager==3.8.4
+<!-- -->
+Los códigos fueron probados con Python 3.9.
+
+## Posibles Problemas
+Dentro de las funciones que realizan los scrapes, se utiliza el método "**time.sleep()**" antes de oprimir cada botón. Esto se hace para esperar a que el botón cargue y no se oprima antes de tiempo. En caso de tener una computadora lenta o una mala conexión a internet, es posible que los tiempos de espera establecidos en el código no sean suficientes para que los botones aparezcan a tiempo. Si este es el caso, deberán ajustar el tiempo en el "**time.sleep()**" correspondiente del botón que no carga a tiempo.
+<img src="https://user-images.githubusercontent.com/108626360/199157396-ff6845c4-cc40-4408-812a-be69e0642b64.jpg" width = 40%>
+ 
+
 
