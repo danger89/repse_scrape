@@ -51,6 +51,6 @@ Debido al reCAPTCHA que está implementado en la página, no se permitirá la ex
 <br/> <br/>
 Si ocurre un bloqueo o no se permite el acceso a los datos (se regresa a la página inicial constantemente), es necesario cambiar a una ubicación distinta utilizando el VPN. <br/> <br/>
 
-<img src="https://user-images.githubusercontent.com/108626360/199156779-3c523670-8d91-4a5d-bc26-a3308ae4a99c.JPG" width = 40%>
+<img src="https://user-images.githubusercontent.com/108626360/199156779-3c523670-8d91-4a5d-bc26-a3308ae4a99c.JPG" width = 25%>
 
 
