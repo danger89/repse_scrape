@@ -31,17 +31,17 @@ Para extraer los nombres de todos los registros, se debe correr "nombres\_scrape
   <!-- -->
 <!-- -->
 ![repse_img6](https://user-images.githubusercontent.com/108626360/199155284-f3cfff3c-f6c8-4cb7-aa1f-b361bc9350c0.JPG) <br/> <br/> 
-El script ejecutará el programa "driver.exe", abriendo un driver de Google Chrome que dará inicio a la extracción de nombres.
+El script ejecutará el programa "**driver.exe**", abriendo un driver de Google Chrome que dará inicio a la extracción de nombres.
 <br/> <br/>
-Los nombres que aún no han sido extraídos se guardarán en "nombres.json" y en "nombres_to_scrape.json"
-en la carpeta "Data". Previo a la divulgación del código, "nombres.json" ya cuenta con más de 80,000 nombres únicos, que representa aproximadamente el 62.6% de todos los registros existentes.
+Los nombres que aún no han sido extraídos se guardarán en "**nombres.json**" y en "**nombres_to_scrape.json**"
+en la carpeta "**Data**". Previo a la divulgación del código, "**nombres.json**" ya cuenta con más de 80,000 nombres únicos, que representa aproximadamente el 62.6% de todos los registros existentes.
 <br/> <br/>
 Nota importante: Es necesario insertar un keyword, ya que la extracción de todos los nombres sin filtro es extremadamente díficl de correr sin problemas. Se recomienda usar keywords de tres o cuatros letras.  
 
 
 ### Extracción de datos de registro
-Para extraer los datos de cada registro se debe correr ''registros\_scrape.py''. <br/> <br/>
+Para extraer los datos de cada registro se debe correr "**registros_scrape.py**". <br/> <br/>
 ![repse_img7](https://user-images.githubusercontent.com/108626360/199155486-f1fd328c-bb75-4ccc-acc7-3869e315df95.JPG) <br/> <br/>
-El script ejecutará el programa "driver.exe", abriendo un driver de Google Chrome que dará inicio a la extracción de datos de cada registro, alimentándose de los nombres en "nombres\_to\_scrape.json".
+El script ejecutará el programa "**driver.exe**", abriendo un driver de Google Chrome que dará inicio a la extracción de datos de cada registro, alimentándose de los nombres en "**nombres_to_scrape.json**".
 <br/> <br/>
-Al extraer los datos de un registro exitosamente, el nombre del registro será borrado automáticamente de "nombres_to_scrape.json" y los datos serán guardados en "registros.json" y en el archivo Excel "Registros_REPSE.xlsx". Si por alguna razón, el nombre no contiene datos o ya están sus datos en "registros.json", será borrado de "nombres_to_scrape.json" sin cambios al excel o a la base de datos.
+Al extraer los datos de un registro exitosamente, el nombre del registro será borrado automáticamente de "**nombres_to_scrape.json**" y los datos serán guardados en "**registros.json**" y en el archivo Excel "**Registros_REPSE.xlsx**". Si por alguna razón, el nombre no contiene datos o ya están sus datos en "**registros.json**", será borrado de "**nombres_to_scrape.json**" sin cambios al excel o a la base de datos.
