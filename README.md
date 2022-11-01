@@ -30,8 +30,8 @@ Para extraer los nombres de todos los registros, se debe correr "nombres\_scrape
   * **"backward**: Ejecuta la extracción de nombres de ''z'' a ''a''
   <!-- -->
 <!-- -->
-<br/> <br/>
 ![repse_img6](https://user-images.githubusercontent.com/108626360/199155284-f3cfff3c-f6c8-4cb7-aa1f-b361bc9350c0.JPG)
+<br/> <br/>
 El script ejecutará el programa "driver.exe", abriendo un driver de Google Chrome que dará inicio a la extracción de nombres.
 <br/> <br/>
 Los nombres que aún no han sido extraídos se guardarán en "nombres.json" y en "nombres_to_scrape.json"
