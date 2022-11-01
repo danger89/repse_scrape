@@ -9,6 +9,8 @@ A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
 
 ### Carpetas
 ![repse_img5](https://user-images.githubusercontent.com/108626360/199153187-9e032976-9c91-412b-b7a7-b5df5f808063.JPG)
+* **Data**: Contiene los datos extraídos en formato json y Excel
+* **Scrape**: Contiene los códigos que realizan la extracción de datos
 
 ### Carpeta "Scrape"
 ![repse_img4](https://user-images.githubusercontent.com/108626360/199153939-1d231009-bda5-4f8f-af46-f1544a5ea55e.JPG)
