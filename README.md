@@ -23,7 +23,7 @@ A continuación, se muestra la estructura de las carpetas a usar:
 * **nombres.json**: Contiene todos los nombres extraídos
 * **nombres_to_scrape.json**: Contiene los nombres cuyos datos no han sido extraídos
 * **registros.json**: Contiene los datos extraídos de cada registro
-* **Registros_REPSE.xlsx**: Excel que contiene los datos de cada registroe
+* **Registros_REPSE.xlsx**: Excel que contiene los datos de cada registro
 
 ## Manual de Uso
 
