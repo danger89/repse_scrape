@@ -50,6 +50,6 @@ Al extraer los datos de un registro exitosamente, el nombre del registro será b
 Debido al reCAPTCHA que está implementado en la página, no se permitirá la extracción de datos después de una cantidad determinada de interacciones automatizadas en ella. Para rodear este problema, se recomienda el uso de un VPN (códigos probados con ExpressVPN).
 <br/> <br/>
 Si ocurre un bloqueo o no se permite el acceso a los datos (se regresa a la página inicial constantemente), es necesario cambiar a una ubicación distinta utilizando el VPN. <br/> <br/>
-![expressVPN](https://user-images.githubusercontent.com/108626360/199156391-7d730341-a707-4320-bb11-60013434a3ed.JPG) <br/> <br/>
+![expressVPN](https://user-images.githubusercontent.com/108626360/199156391-7d730341-a707-4320-bb11-60013434a3ed.JPG | width=10) <br/> <br/>
 
 
