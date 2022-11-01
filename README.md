@@ -23,4 +23,11 @@ A continuación, se muestra la estructura de las carpetas a usar: <br/> <br/>
 
 ## Manual de Uso
 ### Extracción de nombres de registro
+Para extraer los nombres de todos los registros, se debe correr "nombres\_scrape.py". Dentro de este script, se encuentra una función que contiene dos parámetros:
+* **keyword**:  Acota los resultados a registros que contengan el keyword.
+* **direction**: Ejecuta la extracción de nombres en la dirección especificada
+  * **"forward"**: Ejecuta la extracción de nombres de ''a'' a ''z''
+  * **"backward**: Ejecuta la extracción de nombres de ''z'' a ''a''
+
+
 ### Extracción de datos de registro
