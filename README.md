@@ -45,3 +45,11 @@ Para extraer los datos de cada registro se debe correr "**registros_scrape.py**"
 El script ejecutará el programa "**driver.exe**", abriendo un driver de Google Chrome que dará inicio a la extracción de datos de cada registro, alimentándose de los nombres en "**nombres_to_scrape.json**".
 <br/> <br/>
 Al extraer los datos de un registro exitosamente, el nombre del registro será borrado automáticamente de "**nombres_to_scrape.json**" y los datos serán guardados en "**registros.json**" y en el archivo Excel "**Registros_REPSE.xlsx**". Si por alguna razón, el nombre no contiene datos o ya están sus datos en "**registros.json**", será borrado de "**nombres_to_scrape.json**" sin cambios al excel o a la base de datos.
+
+### Uso de VPN
+Debido al reCAPTCHA que está implementado en la página, no se permitirá la extracción de datos después de una cantidad determinada de interacciones automatizadas en ella. Para rodear este problema, se recomienda el uso de un VPN (códigos probados con ExpressVPN).
+<br/> <br/>
+Si ocurre un bloqueo o no se permite el acceso a los datos (se regresa a la página inicial constantemente), es necesario cambiar a una ubicación distinta utilizando el VPN. <br/> <br/>
+![expressVPN](https://user-images.githubusercontent.com/108626360/199156391-7d730341-a707-4320-bb11-60013434a3ed.JPG) <br/> <br/>
+
+
