@@ -94,7 +94,7 @@ def register_scrape():
             wait = WebDriverWait(driver, 10).until(
                 EC.visibility_of_element_located((By.CSS_SELECTOR, 'td'))
             )
-            time.sleep(1.33)
+            time.sleep(1.4)
 
             # Checking if more than one result appears
             td = driver.find_elements(By.CSS_SELECTOR, 'td')
