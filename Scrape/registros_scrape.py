@@ -9,6 +9,9 @@ import copy
 import pandas as pd
 import warnings
 from fake_useragent import UserAgent
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import pprint as pp
 
 
 def register_scrape():
@@ -42,23 +45,33 @@ def register_scrape():
     # Define URL and input into driver
     url = 'https://repse.stps.gob.mx'
     driver.get(url)
-    time.sleep(1.5)
+    # time.sleep(1.5)
 
     # Identify and click "Consulta" button
+    wait = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, '.btn-blanco'))
+    )
     buttons = driver.find_elements(By.CSS_SELECTOR, '.btn-blanco')
     time.sleep(1)
     buttons[1].click()
-    time.sleep(3)
+    # time.sleep(3)
 
     # Identify and click "Consultar" button
+    wait = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, '.btn-continue'))
+    )
     continue_button = driver.find_element(By.CSS_SELECTOR, '.btn-continue')
     continue_button.click()
     time.sleep(3)
 
     # ---------------------------------- Register Scrape ---------------------------------- #
     print('--------------------------------------------')
-
+    nombres_lista = []
+    registros_lista = []
+    count = 0
     for idx, nombre in enumerate(nombres_to_scrape_copy):
+        count += 1
+
         # Identify search bar and input current name
         search_bar = driver.find_element(By.CSS_SELECTOR, '#rsoc')
         search_bar.send_keys(Keys.CONTROL, 'a')
@@ -66,11 +79,23 @@ def register_scrape():
         search_bar.send_keys(nombre)
 
         # Identify and click search button
-        search_button = driver.find_element(By.CSS_SELECTOR, '#bnt_busqueda')
-        search_button.click()
-        time.sleep(2)
+        # search_button = driver.find_element(By.CSS_SELECTOR, '#bnt_busqueda')
+        search_button = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, '#bnt_busqueda'))
+        )
+        try:
+            search_button.click()
+        except:
+            time.sleep(1)
+            search_button.click()
+        # time.sleep(1.8)
 
         try:
+            wait = WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, 'td'))
+            )
+            time.sleep(1.33)
+
             # Checking if more than one result appears
             td = driver.find_elements(By.CSS_SELECTOR, 'td')
             results = []
@@ -83,7 +108,7 @@ def register_scrape():
             selection_buttons = driver.find_elements(By.CSS_SELECTOR, '.g-recaptcha')
             selection_button = selection_buttons[idx2+1]
             selection_button.click()
-            time.sleep(0.4)
+            # time.sleep(0.3)
         except:
             try:
                 CAPTCHA_check = driver.find_element(By.CSS_SELECTOR, '.text-uppercase')
@@ -127,10 +152,11 @@ def register_scrape():
             print(nombre)
             return r
         try:
+            time.sleep(0.7)
             registro = get_data()
         except IndexError:
             try:
-                time.sleep(2)
+                time.sleep(0.2)
                 registro = get_data()
             except:
                 # Identify and click "Consulta" button
@@ -146,50 +172,39 @@ def register_scrape():
                 time.sleep(5)
                 continue
 
-        # Append data to registros.json
-        with open('../Data/registros.json', 'r+') as file:
-            # First we load existing data into a dict.
-            registros_existentes = json.load(file)
-            # Join new_data with existing data inside emp_details
-            if registro not in registros_existentes:
-                print('Entry added to registros.json')
-                registros_existentes.append(registro)
-            else:
-                print(f'Entry already in registros.json')
+        registros_lista.append(registro)
+        nombres_lista.append(nombre)
 
-            # Sets file's current position at offset.
-            file.seek(0)
-            # convert back to json.
-            json.dump(registros_existentes, file, indent=4)
+        # Update registros.json and excel every 20 iterations
+        if count >= 25:
+            # Append data to registros.json
+            with open('../Data/registros.json', 'r+') as file:
+                # First we load existing data into a dict.
+                registros_existentes = json.load(file)
+                # Join new_data with existing data inside emp_details
+                for registro in registros_lista:
+                    if registro not in registros_existentes:
+                        print('Entry added to registros.json')
+                        registros_existentes.append(registro)
+                    else:
+                        print(f'Entry already in registros.json')
 
-        json_object = json.dumps(nombres_to_scrape, indent=4)
+                # Sets file's current position at offset.
+                file.seek(0)
+                # convert back to json.
+                json.dump(registros_existentes, file, indent=4)
 
-        # Updating registros.json
-        with open('../Data/registros.json') as json_file:
-            registros = json.load(json_file)
-        registros = sorted(registros, key=lambda d: d['nombre_o_razon_social'])
+            # Updating registros.json
+            with open('../Data/registros.json') as json_file:
+                registros = json.load(json_file)
+            registros = sorted(registros, key=lambda d: d['nombre_o_razon_social'])
 
-        for obj in registros:
-            if obj["nombre_o_razon_social"] == nombre:
-                index_to_pop = nombres_to_scrape.index(nombre)
-                nombres_to_scrape.pop(index_to_pop)
+            for name in nombres_lista:
+                for obj in registros:
+                    if obj["nombre_o_razon_social"] == name:
+                        index_to_pop = nombres_to_scrape.index(name)
+                        nombres_to_scrape.pop(index_to_pop)
 
-        print('Deleting entry from nombres_to_scrape.json')
-        print('--------------------------------------------')
-        with open('../Data/nombres_to_scrape.json', 'w') as outfile:
-            outfile.write(json_object)
-
-        # Identify and click return button
-        return_button = driver.find_element(By.CSS_SELECTOR, '.btn-secondary')
-        try:
-            return_button.click()
-        except:
-            time.sleep(0.1)
-            return_button.click()
-        time.sleep(2)
-
-        # Every 10 iterations, update excel
-        if idx % 10 == 0:
             # Convert list to pandas DataFrame
             registros = pd.DataFrame(registros)
 
@@ -208,6 +223,26 @@ def register_scrape():
 
             warnings.filterwarnings("ignore")
             writer.save()
+
+            json_object = json.dumps(nombres_to_scrape, indent=4)
+
+            print('Deleting entries from nombres_to_scrape.json')
+            print('--------------------------------------------')
+            with open('../Data/nombres_to_scrape.json', 'w') as outfile:
+                outfile.write(json_object)
+
+            nombres_lista = []
+            registros_lista = []
+            count = 0
+
+        # Identify and click return button
+        return_button = driver.find_element(By.CSS_SELECTOR, '.btn-secondary')
+        try:
+            return_button.click()
+        except:
+            time.sleep(0.1)
+            return_button.click()
+        # time.sleep(1.6)
 
 
 register_scrape()
