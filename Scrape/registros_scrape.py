@@ -13,18 +13,22 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pprint as pp
 
+from useful_functions import update_incomplete_entries as up
+
 
 def register_scrape():
     # ----------------------------- Setting up Register Scrape ----------------------------- #
+    # Update registros.json and nombres_to_scrape.json with the latest info
+    up.update_jsons()
     print('Setting up scrape...')
 
     # Open nombres_to_scrape.json
     with open('../Data/nombres_to_scrape.json') as json_file:
-        nombres_to_scrape = json.load(json_file)
+        data = json.load(json_file)
     try:
-        nombres_to_scrape_copy = copy.deepcopy(nombres_to_scrape[0:4000])
+        data_copy = copy.deepcopy(data[0:4000])
     except:
-        nombres_to_scrape_copy = copy.deepcopy(nombres_to_scrape[0:-1])
+        data_copy = copy.deepcopy(data[0:-1])
 
     # Set up chrome driver options
     ua = UserAgent()
@@ -66,17 +70,17 @@ def register_scrape():
 
     # ---------------------------------- Register Scrape ---------------------------------- #
     print('--------------------------------------------')
-    nombres_lista = []
+    data_lista = []
     registros_lista = []
     count = 0
-    for idx, nombre in enumerate(nombres_to_scrape_copy):
+    for idx, obj in enumerate(data_copy):
         count += 1
 
         # Identify search bar and input current name
         search_bar = driver.find_element(By.CSS_SELECTOR, '#rsoc')
         search_bar.send_keys(Keys.CONTROL, 'a')
         search_bar.send_keys(Keys.BACKSPACE)
-        search_bar.send_keys(nombre)
+        search_bar.send_keys(obj['name'])
 
         # Identify and click search button
         # search_button = driver.find_element(By.CSS_SELECTOR, '#bnt_busqueda')
@@ -102,23 +106,24 @@ def register_scrape():
             for idx1, element in enumerate(td):
                 if idx1 % 3 == 0:
                     results.append(element.text)
-            idx2 = results.index(nombre)
+            idx2 = results.index(obj['name'])
 
             # Identify and click select button
             selection_buttons = driver.find_elements(By.CSS_SELECTOR, '.g-recaptcha')
             selection_button = selection_buttons[idx2+1]
             selection_button.click()
-            # time.sleep(0.3)
+
         except:
             try:
                 CAPTCHA_check = driver.find_element(By.CSS_SELECTOR, '.text-uppercase')
                 if 'CAPCHA' and 'INCORRECTA' in CAPTCHA_check.text:
                     print('Incorrect CAPTCHA')
                 elif "NO" and 'DATOS' in CAPTCHA_check.text:
-                    print('No entry detected')
-                    index_to_pop = nombres_to_scrape.index(nombre)
-                    nombres_to_scrape.pop(index_to_pop)
-                    json_object = json.dumps(nombres_to_scrape, indent=4)
+                    print('--------------------------------------------')
+                    print(f'No entry detected: {obj["name"]}')
+                    index_to_pop = data.index(obj)
+                    data.pop(index_to_pop)
+                    json_object = json.dumps(data, indent=4)
                     print('Deleting entry from nombres_to_scrape.json')
                     print('--------------------------------------------')
                     with open('../Data/nombres_to_scrape.json', 'w') as outfile:
@@ -130,7 +135,7 @@ def register_scrape():
                 continue
 
         # Format data
-        def get_data():
+        def get_data(obje):
             main_data = driver.find_elements(By.CSS_SELECTOR, '.highlightname')
             nombre_o_razon_social = main_data[0].text
             entidad_municipio = main_data[1].text
@@ -144,20 +149,21 @@ def register_scrape():
                 servicios.append(servicio.text)
             r = {
                 'nombre_o_razon_social': nombre_o_razon_social,
+                'numero_de_registro': obje['registro'],
                 'entidad_municipio': entidad_municipio,
                 'aviso_de_registro': aviso_de_registro,
                 'fecha_de_registro': fecha_de_registro,
                 'servicios_ofrecidos': servicios
             }
-            print(nombre)
+            print("Extracting: " + obje['name'])
             return r
         try:
             time.sleep(0.7)
-            registro = get_data()
+            registro = get_data(obj)
         except IndexError:
             try:
                 time.sleep(0.2)
-                registro = get_data()
+                registro = get_data(obj)
             except:
                 # Identify and click "Consulta" button
                 time.sleep(3)
@@ -172,49 +178,73 @@ def register_scrape():
                 time.sleep(5)
                 continue
 
+        # Store entry & data
         registros_lista.append(registro)
-        nombres_lista.append(nombre)
+        data_lista.append(obj)
 
-        # Update registros.json and excel every 20 iterations
-        if count >= 25:
+        # Update registros.json and excel every 25 iterations
+        if count > 20:
             # Append data to registros.json
             with open('../Data/registros.json', 'r+') as file:
-                # First we load existing data into a dict.
                 registros_existentes = json.load(file)
-                # Join new_data with existing data inside emp_details
+                entries_added = 0
+                entries_already = 0
                 for registro in registros_lista:
                     if registro not in registros_existentes:
-                        print('Entry added to registros.json')
+                        entries_added += 1
                         registros_existentes.append(registro)
                     else:
-                        print(f'Entry already in registros.json')
+                        entries_already += 1
+                print('--------------------------------------------')
+                print(f'{entries_added} entries added to registros.json')
+                print(f'{entries_already} already in registros.json')
+                print('--------------------------------------------')
 
                 # Sets file's current position at offset.
                 file.seek(0)
                 # convert back to json.
                 json.dump(registros_existentes, file, indent=4)
 
-            # Updating registros.json
+            # Updating Excel file
+            print('//////////////////////////////////////////////////')
+
+            # Open registros.json
             with open('../Data/registros.json') as json_file:
                 registros = json.load(json_file)
-            registros = sorted(registros, key=lambda d: d['nombre_o_razon_social'])
 
-            for name in nombres_lista:
-                for obj in registros:
-                    if obj["nombre_o_razon_social"] == name:
-                        index_to_pop = nombres_to_scrape.index(name)
-                        nombres_to_scrape.pop(index_to_pop)
+            # Sort alphabetically
+            registros = sorted(registros, key=lambda d: d['nombre_o_razon_social'])
+            print(f'TOTAL entries: {len(registros)}')
+
+            # Complete entries
+            registros_with_number = [obj for obj in registros if obj['numero_de_registro'] != '-']
+            print(f'WITH numero_de_registro: {len(registros_with_number)}')
+
+            # Incomplete entries
+            registros_without_number = [obj for obj in registros if obj['numero_de_registro'] == '-']
+            print(f'WITHOUT numero_de_registro: {len(registros_without_number)}')
+
+            # Append complete with incomplete
+            registros = registros_with_number + registros_without_number
+
+            # Delete data from nombres_to_scrape.json
+            for obj1 in data_lista:
+                for obj2 in registros:
+                    if obj2["nombre_o_razon_social"] == obj1['name']:
+                        index_to_pop = data.index(obj1)
+                        data.pop(index_to_pop)
 
             # Convert list to pandas DataFrame
             registros = pd.DataFrame(registros)
 
             # Writing to Excel file (If "ModuleNotFoundError: No module named openpyxl", install and import openpyxl)
+            print('Writing to ../Data/Registros_REPSE.xlsx, please stand by...')
             writer = pd.ExcelWriter('../Data/Registros_REPSE.xlsx')
             registros.to_excel(writer, sheet_name='Registros', index=False, na_rep='NaN')
 
             # Auto adjust column width
             for index, column in enumerate(registros):
-                if index != 4:
+                if index != 5:
                     column_width = max(registros[column].astype(str).map(len).max(), len(column))
                 else:
                     column_width = 20
@@ -223,15 +253,18 @@ def register_scrape():
 
             warnings.filterwarnings("ignore")
             writer.save()
+            print('Excel file updated successfully')
+            print('//////////////////////////////////////////////////')
 
-            json_object = json.dumps(nombres_to_scrape, indent=4)
-
-            print('Deleting entries from nombres_to_scrape.json')
+            # Delete extracted entries from nombres_to_scrape.json
+            json_object = json.dumps(data, indent=4)
+            print(f'Deleting entries from nombres_to_scrape.json')
             print('--------------------------------------------')
             with open('../Data/nombres_to_scrape.json', 'w') as outfile:
                 outfile.write(json_object)
 
-            nombres_lista = []
+            # Reset stored data
+            data_lista = []
             registros_lista = []
             count = 0
 
