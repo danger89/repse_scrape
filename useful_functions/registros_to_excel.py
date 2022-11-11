@@ -11,9 +11,12 @@ def registros_to_excel():
     # Sort entries alphabetically
     registros = sorted(registros, key=lambda d: d['nombre_o_razon_social'])
     print(f'{len(registros)} TOTAL entries')
-    # Separate between complete entries and incomplete entries
+
+    # Complete entries
     registros_with_number = [obj for obj in registros if obj['numero_de_registro'] != '-']
     print(f'{len(registros_with_number)} WITH number')
+
+    # Incomplete entries
     registros_without_number = [obj for obj in registros if obj['numero_de_registro'] == '-']
     print(f'{len(registros_without_number)} WITHOUT number')
 
