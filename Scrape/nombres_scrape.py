@@ -178,7 +178,7 @@ def name_scrape(keyword, direction):
                     next_page_button.click()
 
                 # WAIT FOR ELEMENTS TO LOAD
-                time.sleep(1.4)
+                time.sleep(1.55)
         except:
             continue
 
